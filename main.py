@@ -20,6 +20,9 @@ if uploaded_file is not None:
     # Merge on shopid and SITEID
     merged_df = pd.merge(outlet_df, site_df, left_on="shopid", right_on="SITEID", how="left")
 
+    # Filter for Karnataka region only
+    merged_df = merged_df[merged_df["Region"] == "Karnataka"]
+
     # Rename columns for final format
     final_df = merged_df.rename(columns={
         "CLUSTER_MANAGER": "mgr"
@@ -37,6 +40,7 @@ if uploaded_file is not None:
         .reset_index(name="Count of Outlets")
         .sort_values(by="Count of Outlets", ascending=False)
     )
+    
 
     # Add serial numbers
     summary_df.insert(0, "S.no", range(1, len(summary_df) + 1))
