@@ -6,7 +6,7 @@ import io
 # Streamlit UI
 st.title("Outlet Info Uploader and Merger")
 
-uploaded_file = st.file_uploader("Upload outlet_info.xlsx", type=["xlsx"])
+uploaded_file = st.file_uploader("Upload Cisco Working On Sim.xlsx", type=["xlsx"])
 
 if uploaded_file is not None:
     # Load site_info.xlsx from disk
