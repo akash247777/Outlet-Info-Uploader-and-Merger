@@ -13,20 +13,21 @@ if uploaded_file is not None:
     site_df = pd.read_excel("site_info.xlsx")
     # Load uploaded outlet_info.xlsx
     outlet_df = pd.read_excel(uploaded_file)
+    outlet_df.columns = outlet_df.columns.str.lower()
 
     # Extract numeric shop ID from 'Name' using regex
-    outlet_df["shopid"] = outlet_df["Name"].apply(lambda x: int(re.findall(r"\d+", str(x))[0]))
+    outlet_df["shopid"] = outlet_df["name"].apply(lambda x: int(re.findall(r"\d+", str(x))[0]))
 
     # Merge on shopid and SITEID
     merged_df = pd.merge(outlet_df, site_df, left_on="shopid", right_on="SITEID", how="left")
 
     # Filter for Karnataka region only
-    merged_df = merged_df[merged_df["Region"] == "Karnataka"]
+    merged_df = merged_df[merged_df["region"] == "Karnataka"]
 
     # Rename columns for final format
     final_df = merged_df.rename(columns={
         "CLUSTER_MANAGER": "mgr"
-    })[["shopid", "mgr", "Name", "Region", "ECO/IZO"]]
+    })[["shopid", "mgr", "name", "region", "eco/izo"]]
 
     # Save detailed merged output to buffer
     merged_buffer = io.BytesIO()
