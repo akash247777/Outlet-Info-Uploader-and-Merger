@@ -73,4 +73,4 @@ if uploaded_file is not None:
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
 else:
-    st.info("Please upload the outlet_info.xlsx file to proceed.")
+    st.info("Please upload your `Cisco Working On Sim` file to proceed.")
